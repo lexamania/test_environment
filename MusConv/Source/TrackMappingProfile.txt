@@ -1,0 +1,2869 @@
+
+// MySpace
+CreateMap<Lib.MySpace.Models.MySpaceTrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Image != null);
+	opt.MapFrom(src => src.Image);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.ReleaseYear != null);
+	opt.MapFrom(src => src.ReleaseYear);
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.PreCondition(src => !string.IsNullOrEmpty(src.IsExplicit));
+	opt.MapFrom(src => bool.Parse(src.IsExplicit));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// MusConvLocalTrack
+CreateMap<MusconvLocalTrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.OriginalTrack?.Id != null);
+	opt.MapFrom(src => src.OriginalTrack.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.OriginalTrack?.Title != null);
+	opt.MapFrom(src => src.OriginalTrack.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.OriginalTrack?.Artist != null);
+	opt.MapFrom(src => src.OriginalTrack.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.OriginalTrack?.Album != null);
+	opt.MapFrom(src => src.OriginalTrack.Album);
+})
+.ForMember(src => src.Path, opt => {
+	opt.PreCondition(src => src.BestResult?.Path != null);
+	opt.MapFrom(src => src.BestResult.Path.ToInvariantString());
+})
+.ForMember(src => src.IsSelected, opt => {
+	opt.MapFrom((src, dest) => src.OriginalTrack?.IsSelected == true);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// CSV
+CreateMap<Lib.Csv.Models.TrackModel, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom(src => src.IsExplicit);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// JSON
+CreateMap<Lib.Json.Models.TrackModel, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Rating, opt => {
+	opt.MapFrom(src => src.IsRated 
+		? new RatingConverterFactory()
+			.GetRatingConverter(RatingMeasurements.BaseHundred)
+			.Convert(src.Rating)
+		: default);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Txt
+CreateMap<Lib.Txt.Models.Track, MusConvTrack>()
+.ForMember(src => src.NameToSend, opt => {
+	opt.PreCondition(src => src.NameToSend != null);
+	opt.MapFrom(src => src.NameToSend);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForMember(src => src.Path, opt => {
+	opt.PreCondition(src => src.Path != null);
+	opt.MapFrom(src => src.Path);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Shazam
+CreateMap<Lib.Shazam.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Hmv
+CreateMap<Lib.HmvStore.Models.HmvTrack, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Vk
+CreateMap<VkNet.Model.Attachments.Audio, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id.Value.ToString(CultureInfo.InvariantCulture));
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// VK Music
+CreateMap<Lib.VkMusic.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.CoverUrl != null);
+	opt.MapFrom(src => src.CoverUrl);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom((src, dest) => src.Duration[..^3]);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Gaana
+CreateMap<Lib.Gaana.Models.Track, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists));
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url);
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForMember(src => src.ISRC, opt => {
+	opt.PreCondition(src => src.Isrc != null);
+	opt.MapFrom(src => src.Isrc);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// YoutTube
+CreateMap<Google.Apis.YouTube.v3.Data.SearchResult, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id?.ETag != null);
+	opt.MapFrom(src => src.Id.ETag);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Snippet?.Title != null);
+	opt.MapFrom(src => src.Snippet.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Snippet?.ChannelTitle != null);
+	opt.MapFrom(src => src.Snippet.ChannelTitle);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Snippet?.ChannelId != null);
+	opt.MapFrom(src => src.Snippet.ChannelId);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Snippet?.Thumbnails?.Default__?.Url != null);
+	opt.MapFrom(src => src.Snippet.Thumbnails.Default__.Url);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Youtube video
+CreateMap<Lib.YoutubeMusic.Models.YoutubeVideo, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.AddZeroToBeginOrEmpty(src.Duration));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.Year != null);
+	opt.MapFrom(src => src.Year.Substring(0, 4));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Youtube
+CreateMap<Lib.YoutubeMusic.Models.YoutubeTrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistId != null);
+	opt.MapFrom(src => src.ArtistId);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumId != null);
+	opt.MapFrom(src => src.AlbumId);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageUrl != null);
+	opt.MapFrom(src => src.ImageUrl);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.Genre != null);
+	opt.MapFrom(src => src.Genre);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.AddZeroToBeginOrEmpty(src.Duration));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.Year != null);
+	opt.MapFrom(src => src.Year.Substring(0, 4));
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom(src => src.IsExplicit);
+})
+.AfterMap((src, dest) => {
+	dest.AdditionalProperties.Add("feedbackToken", src.AddToken);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Youtube Music
+CreateMap<Google.Apis.YouTube.v3.Data.PlaylistItem, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Snippet?.Title != null);
+	opt.MapFrom(src => src.Snippet.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Snippet?.ChannelTitle != null);
+	opt.MapFrom(src => src.Snippet.ChannelTitle);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Snippet?.ChannelId != null);
+	opt.MapFrom(src => src.Snippet.ChannelId);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Snippet?.Thumbnails?.Default__?.Url != null);
+	opt.MapFrom(src => src.Snippet.Thumbnails.Default__.Url);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.ContentDetails?.EndAt != null);
+	opt.MapFrom(src => TimeConverter.AddZeroToBeginOrEmpty(src.ContentDetails.EndAt));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// YouTube Video
+CreateMap<Google.Apis.YouTube.v3.Data.Video, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Snippet?.Title != null);
+	opt.MapFrom(src => src.Snippet.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Snippet?.ChannelTitle != null);
+	opt.MapFrom(src => src.Snippet.ChannelTitle);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Snippet?.ChannelId != null);
+	opt.MapFrom(src => src.Snippet.ChannelId);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.FileDetails?.DurationMs != null);
+	opt.MapFrom((src, dest) => TimeConverter.GetTimeFromMs(src.FileDetails.DurationMs.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Apple
+CreateMap<LibApple.FluffyAttributes, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.PlayParams?.Id != null);
+	opt.MapFrom(src => src.PlayParams.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistUrl != null);
+	opt.MapFrom(src => src.ArtistUrl);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Artwork?.Url != null);
+	opt.MapFrom((src, dest) => LinkConverter.SetImageSize(src.Artwork.Url));
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.GenreNames != null);
+	opt.MapFrom(src => JoinManager.JoinGenres(src.GenreNames.Where(x => x != "Music")));
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.DurationInMillis.ToString()));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.ReleaseDate != null);
+	opt.MapFrom(src => src.ReleaseDate.Substring(0, 4));
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom((src, dest) => src.ContentRating?.ToLowerInvariant() == "explicit");
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Apple
+CreateMap<LibApple.TracksDatum, MusConvTrack>()
+.ConstructUsing((src, ctx) => {
+	return ctx.Mapper.Map<MusConvTrack>(src.Attributes);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Relationships?.Catalog?.Data?.FirstOrDefault()?.Atributes?.ArtistUrl != null);
+	opt.MapFrom(src => src.Relationships.Catalog.Data.FirstOrDefault().Atributes.ArtistUrl);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// ITunes
+CreateMap<MusConv.Helper.ITunes.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.TrackId != null);
+	opt.MapFrom(src => src.TrackId);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Composer, opt => {
+	opt.PreCondition(src => src.Composer != null);
+	opt.MapFrom(src => src.Composer);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.PlayingTime));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.Year != null);
+	opt.MapFrom(src => src.Year);
+})
+.ForMember(src => src.Path, opt => {
+	opt.PreCondition(src => src.Location != null);
+	opt.MapFrom(src => src.Location.ToInvariantString());
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom(src => src.Explicit == true);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Amazon
+CreateMap<AmazonMusic.Models.ResponseModels.Internal.Document, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Asin != null);
+	opt.MapFrom(src => src.Asin);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ArtOriginal?.Url != null);
+	opt.MapFrom(src => src.ArtOriginal.Url);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom((src, dest) => TimeConverter.GetTimeFromMs(src.Duration.ToString()));
+})
+.AfterMap((src, dest) => CheckTrackVersion(dest))
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Amazon
+CreateMap<Lib.AmazonMusic.Models.AnonymousSearch.TrackSearchResult, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Amazon
+CreateMap<AmazonMusic.Models.ResponseModels.Internal.SearchReturnItemList, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Metadata != null);
+	opt.MapFrom(src => src.Metadata.ObjectId.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Metadata?.Title != null);
+	opt.MapFrom(src => src.Metadata.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Metadata?.ArtistName != null);
+	opt.MapFrom(src => src.Metadata.ArtistName);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Metadata?.ArtistAsin != null);
+	opt.MapFrom(src => src.Metadata.ArtistAsin);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Metadata?.AlbumName != null);
+	opt.MapFrom(src => src.Metadata.AlbumName);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.Metadata?.AlbumAsin != null);
+	opt.MapFrom(src => src.Metadata.AlbumAsin);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Metadata?.AlbumCoverImageMedium != null);
+	opt.MapFrom(src => src.Metadata.AlbumCoverImageMedium.ToString());
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Metadata?.Duration != null);
+	opt.MapFrom((src, dest) => TimeConverter.GetTimeFromMs(src.Metadata.Duration.ToString()));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.Metadata?.AlbumReleaseDate != null);
+	opt.MapFrom(src => src.Metadata.AlbumReleaseDate.Value.Year.ToString());
+})
+.AfterMap((src, dest) => CheckTrackVersion(dest))
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Amazon Music
+CreateMap<AmazonMusic.Models.RequestModels.Internal.RequestedMetadata, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Asin != null);
+	opt.MapFrom(src => src.Asin);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistAsin != null);
+	opt.MapFrom(src => src.ArtistAsin);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumAsin != null);
+	opt.MapFrom(src => src.AlbumAsin);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.PrimaryGenre != null);
+	opt.MapFrom(src => src.PrimaryGenre);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.AfterMap((src, dest) => CheckTrackVersion(dest))
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Amazon Music
+CreateMap<AmazonMusic.Models.RequestModels.Internal.PurpleMetadata, MusConvTrack>()
+.ConstructUsing((src, ctx) => {
+	if (src?.RequestedMetadata?.Title != null)
+		return ctx.Mapper.Map<MusConvTrack>(src.RequestedMetadata);
+	return new();
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Asin != null);
+	opt.MapFrom(src => src.Asin);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists.Select(x => x.Name)));
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Artists?.FirstOrDefault()?.DigitalAsin != null);
+	opt.MapFrom(src => src.Artists.FirstOrDefault().DigitalAsin);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumAsin != null);
+	opt.MapFrom(src => src.AlbumAsin);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.AlbumArt?.Url != null);
+	opt.MapFrom(src => src.AlbumArt.Url);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.PrimaryGenre != null);
+	opt.MapFrom(src => src.PrimaryGenre);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.DurationSeconds != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.DurationSeconds.ToString()));
+})
+.AfterMap((src, dest) => CheckTrackVersion(dest))
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Amazon Music
+CreateMap<AmazonMusic.Models.RequestModels.Internal.Track, MusConvTrack>()
+.ConstructUsing((src, ctx) => {
+	if (src?.Metadata?.Title != null)
+		return ctx.Mapper.Map<MusConvTrack>(src.Metadata);
+	else if(src?.Metadata?.RequestedMetadata?.Title != null)
+		return ctx.Mapper.Map<MusConvTrack>(src.Metadata.RequestedMetadata);
+	return new();
+})
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Asin != null);
+	opt.MapFrom(src => src.Asin);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist?.Name != null);
+	opt.MapFrom(src => src.Artist.Name);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.Album?.Asin != null);
+	opt.MapFrom(src => src.Album.Asin);
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.GenreName != null);
+	opt.MapFrom(src => src.GenreName);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.AfterMap((src, dest) => CheckTrackVersion(dest))
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Deezer
+CreateMap<E.Deezer.Api.ITrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.Id.ToInvariantString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist?.Name != null);
+	opt.MapFrom(src => src.Artist.Name);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist.Id.ToString());
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Artwork?.Medium != null);
+	opt.MapFrom(src => src.Artwork.Medium);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.Album?.Genre != null);
+	opt.MapFrom(src => JoinManager.JoinGenres(src.Album.Genre.Select(x => x.Name)));
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.Album?.ReleaseDate != null);
+	opt.MapFrom(src => src.Album.ReleaseDate.Value.Year.ToString());
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom(src => src.IsExplicit);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Plex
+CreateMap<Lib.Plex.Models.TrackModels.Track, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.Id.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.GrandparentTitle != null);
+	opt.MapFrom(src => src.GrandparentTitle);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.ParentTitle != null);
+	opt.MapFrom(src => src.ParentTitle);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.Duration.ToString()));
+})
+.ForMember(src => src.Path, opt => {
+	opt.PreCondition(src => src.Media?.FirstOrDefault()?.Parts?.FirstOrDefault()?.Path != null);
+	opt.MapFrom(src => src.Media.First().Parts.First().Path.ToInvariantString());
+})
+.ForMember(src => src.Rating, opt => {
+	opt.MapFrom(src => new RatingConverterFactory()
+		.GetRatingConverter(RatingMeasurements.BaseTen)
+		.ConvertBack(src.UserRating));
+})
+.AfterMap((src, dest) => {
+	dest.AdditionalProperties.Add("PlaylistItemId", src.PlaylistItemID);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Plex
+CreateMap<Lib.Plex.Models.LocalTrackModels.LocalTrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.GrandparentTitle != null);
+	opt.MapFrom(src => src.GrandparentTitle);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.ParentTitle != null);
+	opt.MapFrom(src => src.ParentTitle);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.Duration.ToString()));
+})
+.ForMember(src => src.Path, opt => {
+	opt.PreCondition(src => src.Medias?.FirstOrDefault()?.Parts?.FirstOrDefault()?.Path != null);
+	opt.MapFrom(src => src.Medias.First().Parts.First().Path.ToInvariantString());
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Discogs
+CreateMap<Discogs.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Discogs
+CreateMap<Discogs.Models.Result, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.Id.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Discogs
+CreateMap<Discogs.Models.Release, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.BasicInfo?.Title != null);
+	opt.MapFrom(src => src.BasicInfo.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.BasicInfo?.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.BasicInfo.Artists.Select(y => y.Name)));
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.BasicInfo?.ImageUrl != null);
+	opt.MapFrom(src => src.BasicInfo.ImageUrl);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Anghami
+CreateMap<Lib.Anghami.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistID != null);
+	opt.MapFrom(src => src.ArtistID);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumID != null);
+	opt.MapFrom(src => src.AlbumID);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Zvooq
+CreateMap<Lib.Zvooq.TrackInfo, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.Id.ToInvariantString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Zvooq
+CreateMap<Lib.Zvooq.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.Id.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistsName != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.ArtistsName));
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Napster
+CreateMap<Lib.Napster.Data.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistId != null);
+	opt.MapFrom(src => src.ArtistId);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumId != null);
+	opt.MapFrom(src => src.AlbumId);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.PlaybackSeconds.ToString()));
+})
+.ForMember(src => src.ISRC, opt => {
+	opt.PreCondition(src => src.Isrc != null);
+	opt.MapFrom(src => src.Isrc);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Spotify
+CreateMap<SpotifyAPI.Web.Models.FullTrack, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists.Select(a => a.Name)));
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Artists?.FirstOrDefault()?.Id != null);
+	opt.MapFrom(src => src.Artists.First().Id);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Name != null);
+	opt.MapFrom(src => src.Album.Name);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageUrl != null);
+	opt.MapFrom(src => src.ImageUrl);
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Uri != null);
+	opt.MapFrom((src, dest) => "https://open.spotify.com/track/" + src.Uri.Split(":").Last());
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.Genre != null);
+	opt.MapFrom(src => src.Genre);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.DurationMs.ToString()));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.Album?.ReleaseDate != null);
+	opt.MapFrom(src => src.Album.ReleaseDate.Substring(0, 4));
+})
+.ForMember(src => src.ISRC, opt => {
+	opt.PreCondition(src => src.ExternalIds?.ContainsKey("isrc") is true);
+	opt.MapFrom(src => src.ExternalIds["isrc"]);
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom(src => src.Explicit);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Spotify
+CreateMap<SpotifyAPI.Web.Models.SimpleTrack, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists.Select(t => t.Name)));
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Artists?.FirstOrDefault()?.Id != null);
+	opt.MapFrom(src => src.Artists.First().Id);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.DurationMs.ToString()));
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom(src => src.Explicit);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Spotify
+CreateMap<SpotifyAPI.Web.Models.PlaylistTrack, MusConvTrack>()
+.ConstructUsing((src, ctx) => {
+	return ctx.Mapper.Map<MusConvTrack>(src.Track);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// DailyMotion
+CreateMap<Lib.Dailymotion.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// JamendoAPI
+CreateMap<Lib.JamendoAPI.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Tidal
+CreateMap<Tidl.Models.TrackModel, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id.ToInvariantString() != null);
+	opt.MapFrom(src => src.Id.ToInvariantString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists.Select(a => a.Name)));
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist.Id.ToString());
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.Album?.Cover != null);
+	opt.MapFrom(src => src.Album.Cover);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => !string.IsNullOrEmpty(src.Album?.Cover));
+	opt.MapFrom(src => Tidl.Methods.TidalCoverHelper.GetImageUrl(src.Album.Cover));
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.StreamStartDate != null);
+	opt.MapFrom(src => src.StreamStartDate.Value.Year.ToString());
+})
+.ForMember(src => src.ISRC, opt => {
+	opt.PreCondition(src => src.Isrc != null);
+	opt.MapFrom(src => src.Isrc);
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom(src => src.Explicit);
+})
+.ForMember(src => src.AdditionalInformation, opt => {
+	opt.MapFrom((src, dest) => src.AudioQuality is "HI_RES"
+		? "Master" : src.AudioQuality is "LOSSLESS"
+		? "HiFi" : null);
+})
+.ForMember(src => src.TrackPriority, opt => {
+	opt.MapFrom((src, dest) => src.AudioQuality is "HI_RES"
+		? 2 : src.AudioQuality is "LOSSLESS"
+		? 1 : 0);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// KKBox
+CreateMap<KKBox.Entity.TrackData, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Album?.Artist?.Name != null);
+	opt.MapFrom(src => src.Album.Artist.Name);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Name != null);
+	opt.MapFrom(src => src.Album.Name);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Slacker
+CreateMap<MusConv.Helper.LiveXLive.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// SaavnMusic
+CreateMap<Lib.JioSaavn.Data.TrackData, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistNames != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.ArtistNames));
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.DurationMillis != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.DurationMillis));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// SaavnMusic
+CreateMap<Lib.JioSaavn.Data.TrackDto, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.MoreInfo?.Album != null);
+	opt.MapFrom(src => src.MoreInfo.Album);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.MoreInfo?.ArtistMap?.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.MoreInfo.ArtistMap.Artists.Select(i => i.Name)));
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.MoreInfo?.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.MoreInfo.Duration));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// AudioMac
+CreateMap<Lib.Audiomack.TrackInfo, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.Id.ToInvariantString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Google Music
+CreateMap<GooglePlayMusicAPI.Models.GooglePlayMusicModels.Track, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.StoreID != null);
+	opt.MapFrom(src => src.StoreID);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistIds?.FirstOrDefault() != null);
+	opt.MapFrom(src => src.ArtistIds.First());
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumId != null);
+	opt.MapFrom(src => src.AlbumId);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.DurationMillis != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.DurationMillis.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Qobuz
+CreateMap<Lib.Qobuz.Models.Item, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => (src.Performer?.Name ?? src.Album?.Artist?.Name) != null);
+	opt.MapFrom((src, dest) => src.Performer?.Name ?? src.Album.Artist.Name);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => (src.Performer?.Id ?? src.Album?.Artist?.Id) != null);
+	opt.MapFrom((src, dest) => (src.Performer?.Id ?? src.Album.Artist.Id).ToString());
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Album?.Image?.Thumbnail != null);
+	opt.MapFrom(src => src.Album.Image.Thumbnail);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForMember(src => src.ISRC, opt => {
+	opt.PreCondition(src => src.Isrc != null);
+	opt.MapFrom(src => src.Isrc);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// SoundCloud
+CreateMap<SoundCloud.Api.Entities.Track, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.User?.Username != null);
+	opt.MapFrom(src => src.User.Username);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.User?.Permalink != null);
+	opt.MapFrom(src => src.User.Permalink);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ArtworkUrl != null);
+	opt.MapFrom(src => src.ArtworkUrl.ToString());
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.Genre != null);
+	opt.MapFrom(src => src.Genre);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.ReleaseDate != null);
+	opt.MapFrom(src => src.ReleaseDate.Substring(0, 4));
+})
+.ForMember(src => src.ISRC, opt => {
+	opt.PreCondition(src => (src.Isrc ?? src.PublisherMetadata?.Isrc) != null);
+	opt.MapFrom(src => src.Isrc ?? src.PublisherMetadata.Isrc);
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.PreCondition(src => src.PublisherMetadata != null);
+	opt.MapFrom(src => src.PublisherMetadata.IsExplicit);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Last.fm
+CreateMap<IF.Lastfm.Core.Objects.LastTrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistUrl != null);
+	opt.MapFrom(src => src.ArtistUrl.ToString());
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Images?.Small != null);
+	opt.MapFrom(src => src.Images.Small.ToString());
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url.ToString());
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromTS(src.Duration.Value));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Last.fm
+CreateMap<IF.Lastfm.Core.Parser.Model.LastPlaylistTrack, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// ATL
+CreateMap<ATL.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.TrackNumber.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForMember(src => src.Path, opt => {
+	opt.PreCondition(src => src.Path != null);
+	opt.MapFrom(src => src.Path.ToInvariantString());
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Yandex Music
+CreateMap<Yandex.Music.Api.Models.Track.YTrack, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists.Select(x => x.Name)));
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Albums?.FirstOrDefault()?.Title != null);
+	opt.MapFrom(src => src.Albums.First().Title);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.DurationMs.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Yandex Music
+CreateMap<Yandex.Music.Api.Models.Track.YTrackContainer, MusConvTrack>()
+.ConstructUsing((src, ctx) => {
+	return ctx.Mapper.Map<MusConvTrack>(src.Track);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// HearthisAt
+CreateMap<Lib.HearthisAt.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// SoundMachine
+CreateMap<Lib.SoundMachine.Model.Track, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumId != null);
+	opt.MapFrom(src => src.AlbumId);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// BeatSource
+CreateMap<Lib.BeatSource.Model.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists.Select(x => x.ArtistName)));
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.Album?.Id != null);
+	opt.MapFrom(src => src.Album.Id);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Emby
+CreateMap<Lib.Emby.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageLink != null);
+	opt.MapFrom(src => src.ImageLink);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Wynk music
+CreateMap<Lib.WynkMusic.Model.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Beatport
+CreateMap<Lib.Beatport.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists));
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.Genres != null);
+	opt.MapFrom(src => src.Genres);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Primephonic
+CreateMap<Lib.Primephonic.Models.Track, MusConvTrack>()
+.ForMember(src => src.Nested, opt => {
+	opt.MapFrom(src => src);
+})
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.AddZeroToBeginOrEmpty(src.Duration));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Audius music
+CreateMap<Lib.Audius.Api.TrackApi.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.id != null);
+	opt.MapFrom(src => src.id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.title != null);
+	opt.MapFrom(src => src.title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.user.name != null);
+	opt.MapFrom(src => src.user.name);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.duration.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// QUB musique
+CreateMap<Lib.QUBmusique.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.KnownEntities?.Artist?.Title != null);
+	opt.MapFrom(src => src.KnownEntities.Artist.Title);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.KnownEntities?.Album?.Title != null);
+	opt.MapFrom(src => src.KnownEntities.Album.Title);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()).ToString());
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// NTSRadio
+CreateMap<Lib.NTSRadio.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.AddZeroToBeginOrEmpty(src.Duration));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Claro music
+CreateMap<Lib.ClaroMusica.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.Id.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artist.Select(x => x.Title)));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Rockbot
+CreateMap<Lib.Rockbot.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.AddZeroToBeginOrEmpty(src.Duration));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// iBroadcast
+CreateMap<Lib.IBroadcast.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// eMusic
+CreateMap<Lib.EMusic.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistId != null);
+	opt.MapFrom(src => src.ArtistId);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Moodagent
+CreateMap<Lib.Moodagent.Models.TrackModel, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.TrackId != null);
+	opt.MapFrom(src => src.TrackId);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration));
+})
+.ForMember(src => src.IsExplicit, opt => {
+	opt.MapFrom(src => src.IsExplicit);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// TagLib
+CreateMap<TagLib.File, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Tag?.Title != null);
+	opt.MapFrom(src => src.Tag.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.MapFrom(src => src.GetArtistTag());
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Tag?.Album != null);
+	opt.MapFrom(src => src.Tag.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Properties?.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromTS(src.Properties.Duration));
+})
+.ForMember(src => src.Year, opt => {
+	opt.PreCondition(src => src.Tag != null);
+	opt.MapFrom(src => src.Tag.Year.ToString());
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// eSound
+CreateMap<Lib.ESound.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.AuthorId != null);
+	opt.MapFrom(src => src.AuthorId);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageLink != null);
+	opt.MapFrom(src => src.ImageLink);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Pandora
+CreateMap<Lib.PandoraSharp.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForMember(src => src.ISRC, opt => {
+	opt.PreCondition(src => src.Isrc != null);
+	opt.MapFrom(src => src.Isrc);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Pandora
+CreateMap<Lib.PandoraSharp.Models.StationTrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Boomplay
+CreateMap<Lib.Boomplay.Models.Music, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.ColID.ToString());
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist?.Name != null);
+	opt.MapFrom(src => src.Artist.Name);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist.ColID.ToString());
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Name != null);
+	opt.MapFrom(src => src.Album.Name);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.LowIconID != null);
+	opt.MapFrom(src => Lib.Boomplay.Models.BoomplayConstants.PrettyUrl(src.LowIconID));
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => Lib.Boomplay.Models.BoomplayConstants.PrettyDuration(src.Duration));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Resso
+CreateMap<Lib.Resso.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artists != null);
+	opt.MapFrom(src => JoinManager.JoinArtists(src.Artists.Select(x => x.Name)));
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Name != null);
+	opt.MapFrom(src => src.Album.Name);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Album?.ImageUrl != null);
+	opt.MapFrom(src => src.Album.ImageUrl.GetImageLink());
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromMs(src.Duration.ToString()));
+})
+.ForMember(src => src.ISRC, opt => {
+	opt.PreCondition(src => src.Isrc != null);
+	opt.MapFrom(src => src.Isrc);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// DI.FM
+CreateMap<Lib.DiFm.Models.DiFmTrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.MapFrom(src => src.Id.ToString(CultureInfo.InvariantCulture));
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageVariations?.Default != null);
+	opt.MapFrom(src => src.ImageVariations.Default);
+})
+.ForMember(src => src.Url, opt => {
+	opt.PreCondition(src => src.Url != null);
+	opt.MapFrom(src => src.Url);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.DurationInSeconds.ToString()));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Roon
+CreateMap<Lib.Roon.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.AlbumName != null);
+	opt.MapFrom(src => src.AlbumName);
+})
+.ForMember(src => src.Path, opt => {
+	opt.PreCondition(src => src.Path != null);
+	opt.MapFrom(src => src.Path);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// TuneFind
+CreateMap<Lib.TuneFind.Model.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Bandcamp
+CreateMap<Lib.Bandcamp.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Charts
+CreateMap<Lib.Charts.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// TikTok
+CreateMap<Lib.TikTok.Helpers.TrackInfo, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.AuthorName != null);
+	opt.MapFrom(src => src.AuthorName);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// TikTok Url
+CreateMap<Lib.TikTokUrl.Models.TikTokTrack, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// NetEase
+CreateMap<Lib.Netease.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.Artists?.FirstOrDefault()?.ArtistId != null);
+	opt.MapFrom(src => src.Artists.First().ArtistId);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.Album?.Id != null);
+	opt.MapFrom(src => src.Album.Id);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Album?.ImageLink != null);
+	opt.MapFrom(src => src.Album.ImageLink);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// NetEase
+CreateMap<Lib.Netease.Models.TrackSearchResult, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album?.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// MusicBrainz
+CreateMap<Lib.MusicBrainz.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Moov
+CreateMap<Lib.Moov.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistId != null);
+	opt.MapFrom(src => src.ArtistId);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumId != null);
+	opt.MapFrom(src => src.AlbumId);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => !string.IsNullOrEmpty(src.ImageLink ?? src.AltImageLink));
+	opt.MapFrom(src => src.ImageLink ?? src.AltImageLink);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// EightTracks
+CreateMap<Lib.EightTracks.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// ESound
+CreateMap<Lib.ESound.Models.Search.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist.Name != null);
+	opt.MapFrom(src => src.Artist.Name);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album.Title != null);
+	opt.MapFrom(src => src.Album.Title);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.Album.Id != null);
+	opt.MapFrom(src => src.Album.Id);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageLink != null);
+	opt.MapFrom(src => src.ImageLink);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Traktor
+CreateMap<Lib.Traktor.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Wikipedia
+CreateMap<Lib.Wikipedia.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// MTV
+CreateMap<Lib.MTV.Model.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// KuGou
+CreateMap<Lib.KuGou.Model.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// BBC Radio
+CreateMap<Lib.BBCRadio.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Musi
+CreateMap<Lib.Musi.Models.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// MusicFinland
+CreateMap<Lib.MusicFinland.Model.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Langitmusik
+CreateMap<Lib.Langitmusik.Backend.Model.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Traxsource
+CreateMap<Lib.Traxsource.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageLink != null);
+	opt.MapFrom(src => src.ImageLink);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.Genre != null);
+	opt.MapFrom(src => src.Genre);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// QQ
+CreateMap<QQParser.Parser.Entities.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromTS(src.Duration.Value));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// 1001Tracklists
+CreateMap<Lib._1001Tracklists.Models.SongInfo, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.SongName != null);
+	opt.MapFrom(src => src.SongName);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.ArtistName != null);
+	opt.MapFrom(src => src.ArtistName);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.SongGenre != null);
+	opt.MapFrom(src => src.SongGenre);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.SongDuration != null);
+	opt.MapFrom(src => src.SongDuration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Idagio
+CreateMap<Lib.Idagio.Model.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => TimeConverter.GetTimeFromS(src.Duration));
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// WebURL
+CreateMap<Lib.WebUrlsParser.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.ArtistId, opt => {
+	opt.PreCondition(src => src.ArtistId != null);
+	opt.MapFrom(src => src.ArtistId);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.AlbumId, opt => {
+	opt.PreCondition(src => src.AlbumId != null);
+	opt.MapFrom(src => src.AlbumId);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageLink != null);
+	opt.MapFrom(src => src.ImageLink);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// AddMyMusic
+CreateMap<Lib.AddMyMusic.Model.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// VirtualDJ
+CreateMap<Lib.VirtualDJ.Model.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Target
+CreateMap<Lib.Target.Model.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Melon
+CreateMap<Lib.Melon.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.ImageLink != null);
+	opt.MapFrom(src => src.ImageLink);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// JPC
+CreateMap<Lib.Jpc.Model.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Groovershark
+CreateMap<Lib.Groovershark.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// GlobalUnderground
+CreateMap<Lib.GlobalUnderground.Models.SongModel, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Genie
+CreateMap<Lib.Genie.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Time
+CreateMap<Lib.Time.Models.Song, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Author != null);
+	opt.MapFrom(src => src.Author);
+})
+.ForMember(src => src.Genre, opt => {
+	opt.PreCondition(src => src.Genre != null);
+	opt.MapFrom(src => src.Genre);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Spinitron
+CreateMap<Lib.Spinitron.Model.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Sheet Music Plus
+CreateMap<Lib.SheetMusicPlus.Model.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// RollingStone
+CreateMap<Lib.RollingStone.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// HypeMachine
+CreateMap<Lib.HypeMachine.SongRecordSimple, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Group != null);
+	opt.MapFrom(src => src.Group);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// iHeartRadio
+CreateMap<Base.Parser.Entities.Track, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Name != null);
+	opt.MapFrom(src => src.Name);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Photo?.Path != null);
+	opt.MapFrom(src => src.Photo.Path);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration.ToString());
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// FreeText
+CreateMap<Lib.FreeText.Models.Track, MusConvTrack>()
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForAllOtherMembers(opt => opt.Ignore());
+
+// Spinrilla
+CreateMap<MusConv.Lib.Spinrilla.Models.SpinrillaTrack, MusConvTrack>()
+.ForMember(src => src.Id, opt => {
+	opt.PreCondition(src => src.Id != null);
+	opt.MapFrom(src => src.Id);
+})
+.ForMember(src => src.Title, opt => {
+	opt.PreCondition(src => src.Title != null);
+	opt.MapFrom(src => src.Title);
+})
+.ForMember(src => src.Artist, opt => {
+	opt.PreCondition(src => src.Artist != null);
+	opt.MapFrom(src => src.Artist);
+})
+.ForMember(src => src.Album, opt => {
+	opt.PreCondition(src => src.Album != null);
+	opt.MapFrom(src => src.Album);
+})
+.ForMember(src => src.ImageLink, opt => {
+	opt.PreCondition(src => src.Image != null);
+	opt.MapFrom(src => src.Image);
+})
+.ForMember(src => src.Duration, opt => {
+	opt.PreCondition(src => src.Duration != null);
+	opt.MapFrom(src => src.Duration);
+})
+.ForAllOtherMembers(opt => opt.Ignore());

@@ -1,0 +1,271 @@
+// Youtube
+CreateMap<MusConv.Lib.YoutubeMusic.Models.YoutubeArtist, MusConvArtist>()
+	.BeforeMap((src, dest) => {
+		dest.ArtistsNeedConversion = false;
+	})
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Title != null);
+		opt.MapFrom(src => src.Title);
+	})
+	.ForMember(src => src.Fans, opt => {
+		opt.PreCondition(src => src.Fans != null);
+		opt.MapFrom(src => src.Fans);
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.ImageUrl != null);
+		opt.MapFrom(src => src.ImageUrl);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Spotify
+CreateMap<SpotifyAPI.Web.Models.FullArtist, MusConvArtist>()
+	.ForMember(src => src.Nested, opt => {
+		opt.MapFrom(src => src);
+	})
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForMember(src => src.Fans, opt => {
+		opt.PreCondition(src => src.Followers != null);
+		opt.MapFrom(src => src.Followers.Total.ToString());
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.Images.FirstOrDefault()?.Url != null);
+		opt.MapFrom(src => src.Images.First().Url);
+	})
+	.ForMember(src => src.Genres, opt => {
+		opt.PreCondition(src => src.Genres != null);
+		opt.MapFrom(src => src.Genres);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Apple
+CreateMap<LibApple.Datum2, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Attributes?.Name != null);
+		opt.MapFrom(src => src.Attributes.Name);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// SoundCloud
+CreateMap<SoundCloud.Api.Entities.User, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => !string.IsNullOrEmpty(src.FullName ?? src.Username));
+		opt.MapFrom(src => src.FullName ?? src.Username);
+	})
+	.ForMember(src => src.Fans, opt => {
+		opt.MapFrom(src => src.FollowersCount.ToString());
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.AvatarUrl != null);
+		opt.MapFrom(src => src.AvatarUrl);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Deezer
+CreateMap<E.Deezer.Api.IArtist, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.MapFrom(src => src.Id.ToString(CultureInfo.InvariantCulture));
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForMember(src => src.Fans, opt => {
+		opt.MapFrom(src => src.NumberOfFans);
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.Images?.Small != null);
+		opt.MapFrom(src => src.Images.Small);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Tidal
+CreateMap<Tidl.Models.ArtistModel, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.MapFrom(src => src.Id.ToString());
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => !string.IsNullOrEmpty(src.Picture));
+		opt.MapFrom(src => Tidl.Methods.TidalCoverHelper.GetImageUrl(src.Picture));
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Pandora
+CreateMap<MusConv.Lib.PandoraSharp.Models.Artist, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Boomplay
+CreateMap<MusConv.Lib.Boomplay.Models.Col, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.MapFrom(src => MusConv.Lib.Boomplay.Models.BoomplayConstants.PrettyId(src.ColID, src.LocalColID));
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForMember(src => src.Fans, opt => {
+		opt.MapFrom(src => src.CollectCount.ToString());
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.SmIconID != null);
+		opt.MapFrom(src => MusConv.Lib.Boomplay.Models.BoomplayConstants.PrettyUrl(src.SmIconID));
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Last.fm
+CreateMap<IF.Lastfm.Core.Objects.LastArtist, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Mbid != null);
+		opt.MapFrom(src => src.Mbid);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForMember(src => src.Url, opt => {
+		opt.PreCondition(src => src.Url != null);
+		opt.MapFrom(src => src.Url.ToString());
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.MainImage?.Small != null);
+		opt.MapFrom(src => src.MainImage.Small.ToString());
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Anghami
+CreateMap<MusConv.Lib.Anghami.Models.Artist, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Title != null);
+		opt.MapFrom(src => src.Title);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Gaana
+CreateMap<MusConv.Lib.Gaana.Models.Artist, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForMember(src => src.Url, opt => {
+		opt.PreCondition(src => src.Url != null);
+		opt.MapFrom(src => src.Url);
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.ArtWork != null);
+		opt.MapFrom(src => src.ArtWork);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Beatport
+CreateMap<MusConv.Lib.Beatport.Models.Artist, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Title != null);
+		opt.MapFrom(src => src.Title);
+	})
+	.ForMember(src => src.Url, opt => {
+		opt.PreCondition(src => src.Uri != null);
+		opt.MapFrom(src => src.Uri);
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.ImageUri != null);
+		opt.MapFrom(src => src.ImageUri);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Emby
+CreateMap<MusConv.Lib.Emby.Models.Artist, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.ImageLink != null);
+		opt.MapFrom(src => src.ImageLink);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// JioSaavn
+CreateMap<MusConv.Lib.JioSaavn.Data.ArtistData, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.ArtistId != null);
+		opt.MapFrom(src => src.ArtistId);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Qobuz
+CreateMap<MusConv.Lib.Qobuz.Models.Artist.ArtistItem, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id.Value.ToString(CultureInfo.InvariantCulture));
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForMember(src => src.ImageLink, opt => {
+		opt.PreCondition(src => src.Picture != null);
+		opt.MapFrom(src => src.Picture);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
+
+// Napster
+CreateMap<MusConv.Lib.Napster.Data.Models.Artist, MusConvArtist>()
+	.ForMember(src => src.Id, opt => {
+		opt.PreCondition(src => src.Id != null);
+		opt.MapFrom(src => src.Id);
+	})
+	.ForMember(src => src.Title, opt => {
+		opt.PreCondition(src => src.Name != null);
+		opt.MapFrom(src => src.Name);
+	})
+	.ForAllOtherMembers(opt => opt.Ignore());
