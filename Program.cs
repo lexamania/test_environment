@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Test.MusConv;
 
 namespace Test
@@ -78,9 +74,39 @@ namespace Test
 
 		public static async Task Main(string[] args)
 		{
-			MapperProfileParser.CreateProfiles();
+			var r1 = new Class1()
+			{
+				Field1 = 45,
+				Field2 = null,
+				Field3 = "17",
+				Field4 = 13,
+			};
+			var r2 = new Class2()
+			{
+				Field1 = 2,
+				Field2 = "2",
+				Field3 = "2",
+				Field4 = 2
+			};
+			var tr1 = TestMapper.Mapper.Map<Class2>(r1);
+			var dict = new Dictionary<string, object>();
+			dict.Add("r1Key", r1);
+			dict.Add("textTest", "simpleText");
+			dict.Add("number", 1);
+			var text = JsonConvert.SerializeObject(dict);
+			Console.WriteLine($"{text}");
 		}
 		
+	}
+
+	public class C1
+	{
+		public string l1 = "l1";
+	}
+
+	public class C2 : C1
+	{
+		public string l2 = "l2";
 	}
 
 
