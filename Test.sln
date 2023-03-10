@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test.csproj", "{791DF809-9F82-433C-A832-0050688711D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "TestMain\Test.csproj", "{791DF809-9F82-433C-A832-0050688711D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCodeAnalyzer", "CSharpCodeAnalyzer\CSharpCodeAnalyzer.csproj", "{113EA1CD-1023-4B8E-B204-9F7D2BB3A5A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{791DF809-9F82-433C-A832-0050688711D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{791DF809-9F82-433C-A832-0050688711D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{791DF809-9F82-433C-A832-0050688711D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{113EA1CD-1023-4B8E-B204-9F7D2BB3A5A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{113EA1CD-1023-4B8E-B204-9F7D2BB3A5A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{113EA1CD-1023-4B8E-B204-9F7D2BB3A5A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{113EA1CD-1023-4B8E-B204-9F7D2BB3A5A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

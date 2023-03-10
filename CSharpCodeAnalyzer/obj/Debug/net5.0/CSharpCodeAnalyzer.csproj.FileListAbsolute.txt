@@ -1,0 +1,12 @@
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\CSharpCodeAnalyzer.csproj.AssemblyReference.cache
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\CSharpCodeAnalyzer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\CSharpCodeAnalyzer.AssemblyInfoInputs.cache
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\CSharpCodeAnalyzer.AssemblyInfo.cs
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\CSharpCodeAnalyzer.csproj.CoreCompileInputs.cache
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\bin\Debug\net5.0\CSharpCodeAnalyzer.deps.json
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\bin\Debug\net5.0\CSharpCodeAnalyzer.dll
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\bin\Debug\net5.0\CSharpCodeAnalyzer.pdb
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\CSharpCodeAnalyzer.dll
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\refint\CSharpCodeAnalyzer.dll
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\CSharpCodeAnalyzer.pdb
+C:\Content\Programing\Programs\Test\CSharpCodeAnalyzer\obj\Debug\net5.0\ref\CSharpCodeAnalyzer.dll
