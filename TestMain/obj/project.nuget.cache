@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8l9jaICeXfU5DPzdEMvjxwv4Lupz9Ez+M0Cpz6E1QtYxr4GHUdMo8itz9IEl2os5NjdrqqDEHqDfpSS81Hsa+w==",
+  "dgSpecHash": "p17K0ZhGyRb1vgyyMUMFks3Vl8Q49DwNFtAQ+Y3IGtEt/reBSfs9hcHed6A5cg0JamfJzoJAJA3N0ta/H4dM+w==",
   "success": true,
   "projectFilePath": "C:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj",
   "expectedPackageFiles": [
@@ -9,8 +9,7 @@
     "C:\\Users\\torba\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\torba\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\torba\\.nuget\\packages\\restsharp\\108.0.3\\restsharp.108.0.3.nupkg.sha512",
-    "C:\\Users\\torba\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
-    "C:\\Users\\torba\\.nuget\\packages\\system.text.json\\5.0.1\\system.text.json.5.0.1.nupkg.sha512"
+    "C:\\Users\\torba\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

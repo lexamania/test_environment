@@ -1,10 +1,9 @@
-namespace CSharpCodeAnalyzer.Models.Base
+namespace CSharpCodeAnalyzer.Models.Base;
+
+public enum ElementType
 {
-    public enum ElementType
-    {
-        Class,
-		Method,
-		Property,
-		Constructor
-    }
+	Class,
+	Method,
+	Property,
+	Constructor
 }

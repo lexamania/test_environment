@@ -1,0 +1,10 @@
+{Usings}
+using MusConv.ViewModels.Services.MusicServices.Clients.Base;
+
+namespace MusConv.ViewModels.Services.MusicServices.Clients
+{
+    public class {Title} : ClientBase<{Parent}>
+    {
+{Properties}
+    }
+}

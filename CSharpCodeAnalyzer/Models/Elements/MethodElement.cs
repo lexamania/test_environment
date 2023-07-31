@@ -1,10 +1,9 @@
 using CSharpCodeAnalyzer.Models.Base;
 
-namespace CSharpCodeAnalyzer.Models.Elements
+namespace CSharpCodeAnalyzer.Models.Elements;
+
+public class MethodElement : CodeElementBase
 {
-	public class MethodElement : CodeElementBase
-	{
-		public override ElementType GetElementType()
-			=> ElementType.Method;
-	}
+	public override ElementType GetElementType()
+		=> ElementType.Method;
 }

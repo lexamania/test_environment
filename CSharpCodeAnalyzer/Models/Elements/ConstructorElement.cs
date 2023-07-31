@@ -1,10 +1,9 @@
 using CSharpCodeAnalyzer.Models.Base;
 
-namespace CSharpCodeAnalyzer.Models.Elements
+namespace CSharpCodeAnalyzer.Models.Elements;
+
+public class ConstructorElement : CodeElementBase
 {
-	public class ConstructorElement : CodeElementBase
-	{
-		public override ElementType GetElementType()
-			=> ElementType.Constructor;
-	}
+	public override ElementType GetElementType()
+		=> ElementType.Constructor;
 }
