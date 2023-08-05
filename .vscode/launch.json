@@ -9,10 +9,10 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/TestMain/bin/Debug/net7.0/Test.dll",
+            "program": "${workspaceFolder}/TestMain/bin/Debug/net7.0/Test.exe",
             "args": [ ],
             "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
+            "console": "externalTerminal",
             "stopAtEntry": false
         }
     ]

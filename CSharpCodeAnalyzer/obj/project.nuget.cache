@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I1PXJ/8QzFYkUEsNyywJvzqYzOFo7q1OthBqpnOMGJEu7EUdbBwF7CA7tV+3Tbozhx+lAEGxOyGrrym8O3NZ8A==",
+  "dgSpecHash": "wG0LWkZ27VvZ0SANk4W9TpgMlb+gy7PgOkbFyXmrAC0BB9Yg/eF9evqLazDbwy/vMz9BCmauQMtB8TYU0KIAPQ==",
   "success": true,
-  "projectFilePath": "C:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
+  "projectFilePath": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

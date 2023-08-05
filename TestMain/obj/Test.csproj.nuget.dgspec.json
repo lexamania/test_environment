@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj": {}
+    "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj": {}
   },
   "projects": {
-    "C:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj": {
+    "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
+        "projectUniqueName": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
         "projectName": "CSharpCodeAnalyzer",
-        "projectPath": "C:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
+        "projectPath": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
         "packagesPath": "C:\\Users\\torba\\.nuget\\packages\\",
-        "outputPath": "C:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\obj\\",
+        "outputPath": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -63,14 +63,14 @@
         }
       }
     },
-    "C:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj": {
+    "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj",
+        "projectUniqueName": "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj",
         "projectName": "Test",
-        "projectPath": "C:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj",
+        "projectPath": "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj",
         "packagesPath": "C:\\Users\\torba\\.nuget\\packages\\",
-        "outputPath": "C:\\Content\\Programing\\Programs\\Test\\TestMain\\obj\\",
+        "outputPath": "c:\\Content\\Programing\\Programs\\Test\\TestMain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -91,8 +91,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj": {
-                "projectPath": "C:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj"
+              "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj": {
+                "projectPath": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj"
               }
             }
           }
