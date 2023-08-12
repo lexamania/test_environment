@@ -1,0 +1,16 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MusConv.ViewModels.Models.MusicItems;
+using MusConv.ViewModels.Services.Mapper;
+using MusConv.ViewModels.Services.MusicServices.Managers.Urls.Base;
+
+namespace MusConv.ViewModels.Services.MusicServices.Managers.Urls.Albums
+{
+    public class {service}AlbumUrlManager : AlbumUrlManagerBase
+    {
+        public override async Task<List<MusConvAlbum>> GetAlbumsByUrlAsync(string url)
+        {
+{body}
+        }
+    }
+}

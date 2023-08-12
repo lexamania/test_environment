@@ -1,0 +1,16 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MusConv.ViewModels.Models.MusicItems;
+using MusConv.ViewModels.Services.Mapper;
+using MusConv.ViewModels.Services.MusicServices.Interfaces.Urls;
+
+namespace MusConv.ViewModels.Services.MusicServices.Managers.Urls.Tracks
+{
+    public class {service}TrackUrlManager : ITracksByUrlReader
+    {
+        public async Task<List<MusConvTrack>> GetTracksByUrlAsync(string url)
+        {
+{body}
+        }
+    }
+}

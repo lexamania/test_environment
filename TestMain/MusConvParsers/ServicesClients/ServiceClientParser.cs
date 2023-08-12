@@ -18,18 +18,77 @@ public class ServiceClientParser
 	private readonly string[] TypesExceptions = { "string", "int", "List" };
 	private readonly string[] AcceptedUsings = { "MusConv.Lib" };
 	private readonly string[] UnacceptedUsings = { "MusConv", "System", "ServiceStack", "Nancy" };
-	private readonly string[] RemovedElements = { "Album", "Artist", "Track", "CreatePlaylist", "Playlist", "Manager", "Export", "Searcher", "Search", "Stats", "View", "Related" };
+	private readonly string[] RemovedElements = { "UrlModel", "Model", "Album", "Artist", "Track", "CreatePlaylist", "Playlist", "Manager", "Export", "Searcher", "Search", "Stats", "View", "Related" };
 	private readonly string[] PathExceptions = { @"C:\Content\Job\musconv\musconv\MusConv.ViewModels\Services\MusicServices\Managers\Common",
 		@"C:\Content\Job\musconv\musconv\MusConv.ViewModels\Services\MusicServices\Managers\Base" };
 	private readonly string[] NameExceptions = { "_manager" };
 
 	public void UpdateFiles()
 	{
-		var files = FileExtension.GetFilesRecursively($"{ManagersFolderPath}\\Tracks");
-		foreach (var file in files.Where(x => !PathExceptions.Any(p => x.StartsWith(p))))
+		var files = FileExtension.GetFilesRecursively($"{ModelFolderPath}\\UrlModels");
+		foreach (var file in files.Skip(11))
 		{
-			RemoveServiceFromManagersInModels(file);
+			if (Path.GetFileNameWithoutExtension(file).StartsWith("TikTok"))
+				continue;
+			CreateUrlManagers(file);
 		}
+	}
+
+	public void CreateUrlManagers(string path)
+	{
+		var modelName = ClearName(Path.GetFileNameWithoutExtension(path));
+		var fileContent = FileExtension.GetFileContentAsLines(path);
+
+		var lastIndex = GetIndexLast(fileContent, "    }");
+		if (lastIndex == -1) return;
+
+		var albumIndex = GetIndex(fileContent, "        public async Task<MusConvAlbum> GetAlbumByUrlAsync");
+		if (albumIndex == -1)
+			albumIndex = GetIndex(fileContent, "        public async Task<List<MusConvAlbum>> GetAlbumsByUrlAsync");
+		if (albumIndex > -1)
+			CreateUrlManager("Album", modelName, fileContent, albumIndex, lastIndex);
+
+		var playlistIndex = GetIndex(fileContent, "        public async Task<MusConvPlayList> GetPlaylistByUrlAsync");
+		if (playlistIndex == -1)
+			playlistIndex = GetIndex(fileContent, "        public async Task<List<MusConvPlayList>> GetPlaylistsByUrlAsync");
+		if (playlistIndex > -1)
+			CreateUrlManager("Playlist", modelName, fileContent, playlistIndex, lastIndex);
+
+		var artistIndex = GetIndex(fileContent, "        public async Task<MusConvArtist> GetArtistByUrlAsync");
+		if (artistIndex == -1)
+			artistIndex = GetIndex(fileContent, "        public async Task<List<MusConvArtist>> GetArtistsByUrlAsync");
+		if (artistIndex > -1)
+			CreateUrlManager("Artist", modelName, fileContent, artistIndex, lastIndex);
+
+		var trackIndex = GetIndex(fileContent, "        public async Task<MusConvTrack> GetTrackByUrlAsync");
+		if (trackIndex == -1)
+			trackIndex = GetIndex(fileContent, "        public async Task<List<MusConvTrack>> GetTracksByUrlAsync");
+		if (trackIndex > -1)
+			CreateUrlManager("Track", modelName, fileContent, trackIndex, lastIndex);
+	}
+
+	private int GetIndex(string[] text, string start)
+	{
+		for (int i = 0; i < text.Length; ++i)
+			if (text[i].StartsWith(start)) return i;
+		return -1;
+	}
+
+	private int GetIndexLast(string[] text, string start)
+	{
+		for (int i = text.Length - 1; i > 0; --i)
+			if (text[i].StartsWith(start)) return i;
+		return -1;
+	}
+
+	private void CreateUrlManager(string type, string modelName, string[] fileContent, int start, int end)
+	{
+		var template = FileExtension.GetFileContentAsText(@$"C:\Content\Programing\Programs\Test\TestMain\MusConvParsers\ServicesClients\Models\Templates\{type}UrlManagerTemplate.txt");
+		template = template
+			.Replace("{service}", modelName)
+			.Replace("{body}", JoinManager.JoinLines(fileContent, start + 2, end - 1));
+		using var stream = File.CreateText($"{ManagersFolderPath}\\Urls\\{type}s\\{modelName}{type}UrlManage.cs");
+		stream.Write(template.Trim());
 	}
 
 	public void RemoveService(string path)

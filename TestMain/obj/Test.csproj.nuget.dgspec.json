@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj": {}
+    "c:\\Content\\Programing\\Projects\\Test\\TestMain\\Test.csproj": {}
   },
   "projects": {
-    "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj": {
+    "c:\\Content\\Programing\\Projects\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
+        "projectUniqueName": "c:\\Content\\Programing\\Projects\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
         "projectName": "CSharpCodeAnalyzer",
-        "projectPath": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
+        "projectPath": "c:\\Content\\Programing\\Projects\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj",
         "packagesPath": "C:\\Users\\torba\\.nuget\\packages\\",
-        "outputPath": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\obj\\",
+        "outputPath": "c:\\Content\\Programing\\Projects\\Test\\CSharpCodeAnalyzer\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\torba\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\torba\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,40 +53,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj": {
+    "c:\\Content\\Programing\\Projects\\Test\\TestMain\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj",
+        "projectUniqueName": "c:\\Content\\Programing\\Projects\\Test\\TestMain\\Test.csproj",
         "projectName": "Test",
-        "projectPath": "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj",
+        "projectPath": "c:\\Content\\Programing\\Projects\\Test\\TestMain\\Test.csproj",
         "packagesPath": "C:\\Users\\torba\\.nuget\\packages\\",
-        "outputPath": "c:\\Content\\Programing\\Programs\\Test\\TestMain\\obj\\",
+        "outputPath": "c:\\Content\\Programing\\Projects\\Test\\TestMain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\torba\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\torba\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj": {
-                "projectPath": "c:\\Content\\Programing\\Programs\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj"
+              "c:\\Content\\Programing\\Projects\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj": {
+                "projectPath": "c:\\Content\\Programing\\Projects\\Test\\CSharpCodeAnalyzer\\CSharpCodeAnalyzer.csproj"
               }
             }
           }
@@ -140,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

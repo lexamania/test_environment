@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wWdQCEFaBGKmh9gtlThP3SDOJbFmNMPOVz0oBMqwWQK/Bv9qTdLPXgmmkYPbkWbO00675yHsEZk+ZECpbLHBxA==",
+  "dgSpecHash": "pK2eDNbU7jHYZOfIe5WUOxOlkVySxvwTel7FTfedr90Idoii5Om5RLe1ObAdh1UvrJocgEshLE7/WHNo9c8VNg==",
   "success": true,
-  "projectFilePath": "c:\\Content\\Programing\\Programs\\Test\\TestMain\\Test.csproj",
+  "projectFilePath": "c:\\Content\\Programing\\Projects\\Test\\TestMain\\Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\torba\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
     "C:\\Users\\torba\\.nuget\\packages\\htmlagilitypack\\1.11.46\\htmlagilitypack.1.11.46.nupkg.sha512",
